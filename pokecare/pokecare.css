@@ -1,0 +1,139 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#menu {
+  background-color: var(--sand);
+  margin-top: 16vh;
+  width: 80vw;
+  min-height: 64vh;
+  max-width: 45vw;
+  border: 4px solid var(--moss);
+  border-radius: 48px;
+  justify-self: center;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+#menu > p {
+  color: var(--obsidian);
+  padding: 10px;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.menu-buttons {
+  border: none;
+  border-radius: 8px;
+  width: 32%;
+  padding: 10px;
+  margin: 8px 0px;
+  font-weight: 700;
+  font-size: 1em;
+  color: var(--white);
+  background-color: var(--moss);
+  cursor: pointer;
+}
+
+.menu-buttons:hover {
+  background-color: var(--highlighted-moss);
+}
+
+.menu-buttons:active {
+  background-color:var(--active-moss);
+}
+
+/* pet choices */
+#choices-background {
+  display: none;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(1px);
+  align-content: center;
+}
+
+#choices-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 45vw;
+  max-width: 75vw;
+  min-height: 50%;
+  max-height: fit-content;
+  justify-self: center;
+  align-content: center;
+  background-color: var(--white);
+  border-radius: 24px;
+  padding: 20px;
+}
+
+#choices-modal > p {
+  color: var(--obsidian);
+  font-size: 1.25em;
+  padding-right: 20px;
+}
+
+#choices-modal > p > #close-modal {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  font-size: 32px;
+  cursor: pointer;
+  color: var(--light-obsidian);
+  transition: color 0.15s;
+  z-index: 50;
+
+  line-height: 20px;
+}
+
+#choices-modal > p > #close-modal:hover {
+  color: var(--obsidian);
+}
+
+#choices-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  /* border: 2px solid black; */
+  padding: 10px;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 100%;
+}
+
+.choices {
+  /* border: 2px solid var(--moss); */
+  border-radius: 12px;
+  background-color: #fff;
+  opacity: 0.5;
+  box-shadow: 2px 2px 5px var(--shadow);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.choices:hover{
+  opacity: 1;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 8px var(--shadow);
+}
+
+.choices:active {
+  transform: translateY(0px);
+    box-shadow: 2px 2px 5px var(--shadow);
+}
+
+@media screen and (max-width: 830px) {
+  #menu {
+    min-width: 80vw;
+  }
+}
