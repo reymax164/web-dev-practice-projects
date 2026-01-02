@@ -50,7 +50,7 @@ body {
 }
 
 /* pet choices */
-#choices-background {
+#transparent-background {
   display: none;
   position: fixed;
   height: 100%;
@@ -113,6 +113,7 @@ body {
 
 .choices {
   /* border: 2px solid var(--moss); */
+  min-height: 124px;
   border-radius: 12px;
   background-color: #fff;
   opacity: 0.5;

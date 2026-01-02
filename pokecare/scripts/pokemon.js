@@ -1,21 +1,3 @@
-// fetch
-export async function getSprite(species) {
-  try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${species}`);
-    
-    if (!response.ok) {
-        throw new Error("Could not fetch");
-    }
-    
-    const data = await response.json();
-    
-    return data.sprites.front_default; 
-    
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 // Pokemon super/parent class
 class Pokemon {
   constructor(name) {
@@ -25,17 +7,10 @@ class Pokemon {
     this.energy = 100;
     this.isAlive = true;
 
-    // Singleton Pattern
-    if (Pokemon.instance) {
+    if(Pokemon.instance) {
       return Pokemon.instance;
     }
     Pokemon.instance = this;
-
-  }
-
-  // getters and setters
-  get getSpecies() {
-    return this.species;
   }
 
   get getName() {
@@ -76,20 +51,29 @@ class Pokemon {
 export class Treecko extends Pokemon {
   constructor(name) {
       super(name);
-      this.species = "Treecko"
+  }
+
+  static get getSpecies() {
+    return "Treecko";
   }
 }
 
 export class Mudkip extends Pokemon {
   constructor(name) {
       super(name);
-      this.species = "Mudkip"
+  }
+
+  static get getSpecies() {
+    return "Mudkip";
   }
 }
 
 export class Torchic extends Pokemon {
   constructor(name) {
       super(name);
-      this.species = "Torchic";
+  }
+
+  static get getSpecies() {
+    return "Torchic";
   }
 }
