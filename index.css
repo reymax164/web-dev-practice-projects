@@ -15,6 +15,10 @@ body {
   z-index: 99;
 }
 
+#sidebar > hr {
+  margin: 6px 0;
+}
+
 main {
   position: relative; 
   margin-left: 182.488px;

@@ -24,20 +24,20 @@ closeModal.addEventListener('click', () => {
 })
 
 // choice
-let pokemon, choice;
+let pokemon, choice, name;
 choices[0].addEventListener('click', () => {
     choice = 0;
-    pokemon = new Treecko("Butiki");
+    pokemon = new Treecko(name);
     choiceModal.style.display = "none";
 });
 choices[1].addEventListener('click', () => {
     choice = 1;
-    pokemon = new Torchic("Kwek-kwek");
+    pokemon = new Torchic(name);
     choiceModal.style.display = "none";
 });
 choices[2].addEventListener('click', () => {
     choice = 2;
-    pokemon = new Mudkip("Butete");
+    pokemon = new Mudkip(name);
     choiceModal.style.display = "none";
 });
 
