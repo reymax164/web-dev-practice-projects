@@ -3,7 +3,7 @@ body {
   flex-direction: column;
 }
 
-#sidebar {
+#desc-aside {
   position: fixed;
   width: 182.488px;
   height: 100vh;
@@ -15,17 +15,25 @@ body {
   z-index: 99;
 }
 
-#sidebar > hr {
+#desc-aside > hr {
   margin: 6px 0;
 }
 
+#title, #description {
+  opacity: 1;
+  transition: opacity 0.2s ease; 
+  min-height: 1.5em; 
+}
+
 main {
-  position: relative; 
+  position: relative;
   margin-left: 182.488px;
   padding: 100px 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(264px, 1fr));
   gap: 40px 20px;
+  height: auto;
+  min-height: 100vh;
   width: auto; 
   max-width: 100%;
 }
@@ -87,7 +95,7 @@ main {
     font-size: 1.5em;
   } 
 
-  #sidebar {
+  #desc-aside {
     transform: translateX(-100%);
     display: none;
     width: 0;
