@@ -1,5 +1,5 @@
 // Pokemon super/parent class
-class Pokemon {
+export class Pokemon {
   constructor(name) {
     this.name = name;
     this.hunger = 100;
@@ -11,6 +11,10 @@ class Pokemon {
       return Pokemon.instance;
     }
     Pokemon.instance = this;
+  }
+
+  static deleleInstance() {
+    Pokemon.instance = null;
   }
 
   get getName() {
@@ -51,29 +55,20 @@ class Pokemon {
 export class Treecko extends Pokemon {
   constructor(name) {
       super(name);
-  }
-
-  static get getSpecies() {
-    return "Treecko";
+      // console.log(this);  
   }
 }
 
 export class Mudkip extends Pokemon {
   constructor(name) {
       super(name);
-  }
-
-  static get getSpecies() {
-    return "Mudkip";
+      // console.log(this);
   }
 }
 
 export class Torchic extends Pokemon {
   constructor(name) {
       super(name);
-  }
-
-  static get getSpecies() {
-    return "Torchic";
+      // console.log(this);
   }
 }

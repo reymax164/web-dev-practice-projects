@@ -49,10 +49,10 @@ body {
   background-color:var(--active-moss);
 }
 
-/* pet choices */
+/* ========== choices ========== */
 #transparent-background {
-  display: none;
   /* display: block; */
+  display: none;
   position: fixed;
   height: 100%;
   width: 100%;
@@ -72,6 +72,7 @@ body {
   justify-self: center;
   align-content: center;
   background-color: var(--white);
+  /* border: 2px solid var(--moss); */
   border-radius: 24px;
   padding: 20px;
 }
@@ -113,7 +114,6 @@ body {
 }
 
 .choices {
-  /* border: 2px solid var(--moss); */
   min-height: 124px;
   border-radius: 12px;
   background-color: #fff;
@@ -134,7 +134,7 @@ body {
   box-shadow: 2px 2px 5px var(--shadow);
 }
 
-/* name input */
+/* ========== name input ========== */
 #input-div {
   display: none;
   justify-self: center;
@@ -169,8 +169,119 @@ body {
   background-color: var(--light-moss);
 }
 
+/* ========== game ========== */
+#game-container {
+  justify-self: center;
+  display: none;
+  flex-direction: column;
+  height: 64vh;
+  width: 48vw;
+}
+
+#game-screen {
+  position: relative;
+  display: grid;
+  justify-content: center;
+  height: 90%;
+  background-color: var(--white);
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+}
+
+#game-btns-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: var(--moss);
+  gap: 10%;
+  row-gap: 10px;
+  padding: 12px 24px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+/* game buttons */
+.game-buttons {
+  border: none;
+  border-radius: 16px;
+  padding: 8px 16px;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+#game-play-btn {
+  background-color: #2fda2f;
+}
+
+#game-feed-btn {
+  background-color: #ff4400;
+}
+
+#game-sleep-btn {
+  background-color: #000080;
+}
+
+#game-play-btn:hover {
+  background-color: #20b620;
+}
+
+#game-feed-btn:hover {
+  background-color: #cc3600;
+}
+
+#game-sleep-btn:hover {
+  background-color: #00004d;
+}
+
+#game-play-btn:active {
+  background-color: hsl(120, 70%, 37%);
+}
+
+#game-feed-btn:active {
+  background-color: hsl(16, 100%, 35%);
+}
+
+#game-sleep-btn:active {
+  background-color: hsl(240, 100%, 10%);
+}
+
+/* stats */
+#stats-container {
+  background-color: var(--moss);
+  min-width: fit-content;
+  width: 25%;
+  padding: 16px;
+  position: absolute;
+  justify-items: left;
+  top: 0;
+  left: 0;
+  border-bottom-right-radius: 16px;
+  border-top-left-radius: 16px;
+}
+
+.pokemon-stats-p {
+  width: fit-content;
+  color: var(--white);
+}
+
+#game-pokemon {
+  align-self: center;
+  justify-self: center;
+}
+
 @media screen and (max-width: 830px) {
   #menu {
     min-width: 80vw;
+  }
+
+  #game-container {
+    width: 80vw;
+  }
+
+  #game-btns-container {
+    padding: 8px;
   }
 }
