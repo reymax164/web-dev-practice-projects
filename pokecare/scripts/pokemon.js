@@ -1,16 +1,19 @@
 // Pokemon super/parent class
-export class Pokemon {
-  constructor(name) {
+export default class Pokemon {
+  constructor(name, species) {
     this.name = name;
     this.hunger = 100;
     this.mood = 100;
     this.energy = 100;
-    this.isAlive = true;
+    this.species = species;
 
     if(Pokemon.instance) {
       return Pokemon.instance;
     }
     Pokemon.instance = this;
+
+    console.log(this);
+    
   }
 
   static deleleInstance() {
@@ -26,7 +29,7 @@ export class Pokemon {
   }
 
   // action methods
-  eat() {
+ feed() {
     console.log(`${this.name} is eating.`);
   }
 
@@ -52,23 +55,23 @@ export class Pokemon {
 }
 
 // Pokemon classes
-export class Treecko extends Pokemon {
-  constructor(name) {
-      super(name);
-      // console.log(this);  
-  }
-}
+// export class Treecko extends Pokemon {
+//   constructor(name) {
+//       super(name);
+//       // console.log(this);  
+//   }
+// }
 
-export class Mudkip extends Pokemon {
-  constructor(name) {
-      super(name);
-      // console.log(this);
-  }
-}
+// export class Mudkip extends Pokemon {
+//   constructor(name) {
+//       super(name);
+//       // console.log(this);
+//   }
+// }
 
-export class Torchic extends Pokemon {
-  constructor(name) {
-      super(name);
-      // console.log(this);
-  }
-}
+// export class Torchic extends Pokemon {
+//   constructor(name) {
+//       super(name);
+//       // console.log(this);
+//   }
+// }

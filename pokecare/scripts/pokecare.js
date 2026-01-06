@@ -1,4 +1,4 @@
-import {Treecko, Mudkip, Torchic, Pokemon} from './pokemon.js';
+import Pokemon from './pokemon.js';
 import PokeAPI from './pokeapi.js';
 
 // html elements
@@ -16,7 +16,12 @@ const confirmNameBtn = document.getElementById('confirm-name-btn');
 
 // game
 const game = document.getElementById('game-container');
-const gamePokemon = document.getElementById('game-pokemon')
+const gamePokemon = document.getElementById('game-pokemon');
+
+// game buttons
+const playGameButton = document.getElementById('game-play-btn');
+const feedGameButton = document.getElementById('game-feed-btn');
+const sleepGameButton = document.getElementById('game-sleep-btn');
 
 // close buttons declarations
 const closeBtns = document.querySelectorAll('.close-btn');
@@ -75,8 +80,6 @@ async function setSprites() {
   await Promise.all(spritePromises);
 }
 
-setSprites();
-
 // sprite in-game
 async function setGameSprite(choice) {
   gamePokemon.src = await api.getSprite(choice);
@@ -96,39 +99,63 @@ function closeChoices_OpenNameInput() {
   inputDiv.style.display = 'block';
 }
 
-// choice
-choices[0].addEventListener('click', () => {
-  choice = "Treecko";
-  closeChoices_OpenNameInput();
-});
+// buttons handler function
+function gameButtonsFunction() {
+  playGameButton.addEventListener('click', () => {
+    pokemon.play();
+  });
 
-choices[1].addEventListener('click', () => {
-  choice = "Torchic";
-  closeChoices_OpenNameInput();
-});
+  feedGameButton.addEventListener('click', () => {
+    pokemon.feed();
+  });
 
-choices[2].addEventListener('click', () => {
-  choice = "Mudkip";
-  closeChoices_OpenNameInput();
-});
+  sleepGameButton.addEventListener('click', () => {
+    pokemon.sleep();
+  });
+}
 
-// confirm button in name input
-confirmNameBtn.addEventListener('click', () => {
-  // gets the input
-  name = nameTextbox.value;
-  // creates object based on choice and input
-  if(pokemon === null) {
-    if(choice === "Treecko") {
-      pokemon = new Treecko(name);
-    } else if (choice === "Torchic") {
-      pokemon = new Torchic(name)
-    } else if (choice === "Mudkip") {
-      pokemon = new Mudkip(name)
+async function nameInputFunction() {
+  const pokemonList = await fetchPokemonList();
+
+  // choice
+  choices[0].addEventListener('click', () => {
+    choice = pokemonList[0].species;
+    closeChoices_OpenNameInput();
+  });
+
+  choices[1].addEventListener('click', () => {
+    choice = pokemonList[1].species;;
+    closeChoices_OpenNameInput();
+  });
+
+  choices[2].addEventListener('click', () => {
+    choice = pokemonList[2].species;;
+    closeChoices_OpenNameInput();
+  });
+
+  // confirm button in name input
+  confirmNameBtn.addEventListener('click', () => {
+    // gets the input
+    name = nameTextbox.value;
+    // creates object based on choice and input
+    if(pokemon === null) {
+      if(choice === pokemonList[0].species) {
+        pokemon = new Pokemon(name, pokemonList[0].species);
+      } else if (choice === pokemonList[1].species) {
+        pokemon = new Pokemon(name, pokemonList[1].species)
+      } else if (choice === pokemonList[2].species) {
+        pokemon = new Pokemon(name, pokemonList[2].species)
+      }
     }
-  }
 
-  nameTextbox.value = "";
-  setGameSprite(choice);
-  inputDiv.style.display = "none";
-  game.style.display = "flex";
-});
+    nameTextbox.value = "";
+    setGameSprite(choice);
+    inputDiv.style.display = "none";
+    game.style.display = "flex";
+  });
+
+  gameButtonsFunction();
+}
+
+setSprites();
+nameInputFunction();
