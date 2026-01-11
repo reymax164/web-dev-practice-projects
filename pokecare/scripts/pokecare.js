@@ -19,12 +19,19 @@ const game = document.getElementById('game-container');
 const gamePokemon = document.getElementById('game-pokemon');
 const pokemonName = document.getElementById('pokemon-name');
 
-const onScreenPoints = document.getElementById('points');
+const onScreenScore = document.getElementById('on-screen-score');
+
+const onScreenLog = document.getElementById('on-screen-log');
 const outcomeLog = document.getElementById('outcome-log');
 const moodLog = document.getElementById('mood-log');
 const hungerLog = document.getElementById('hunger-log');
 const energyLog = document.getElementById('energy-log');
 const statChanges = Pokemon.getStatChanges();
+
+// lose screen
+const loseScreen = document.getElementById('lose-screen');
+const loseScreenMessage = document.getElementById('lose-screen-message');
+const loseScreenScore = document.getElementById('lose-screen-score');
 
 // game buttons
 const gameButtons = document.querySelectorAll('.game-buttons')
@@ -37,29 +44,25 @@ const onScreenMood = document.getElementById('mood-p');
 const onScreenHunger = document.getElementById('hunger-p');
 const onScreenEnergy = document.getElementById('energy-p');
 
-
 // variables
 let pokemon = null, choice = null, name = null, cooldownTimer = null, degradeIntervalTimer;
-let points = 0, pointsCounter = null;
+let score = 0, pointsCounter = null;
 
 // close buttons declarations
 const closeBtns = document.querySelectorAll('.close-btn');
 const closeChoices = closeBtns[0];
 const closeNameInput = closeBtns[1];
 const closeGame = closeBtns[2];
+const closeLoseScreen = closeBtns[3];
 
 // reset
 function reset() {
-  clearInterval(degradeIntervalTimer);
-  clearInterval(pointsCounter);
-
-  // logs points
-  console.log(`Points: ${points}`);
+  // logs score
+  // console.log(`Points: ${score}`);
   
-  points = 0;
-  onScreenPoints.textContent = "Points: 0";
-  gamePokemon.src = "";
-  game.style.display = 'none';
+  score = 0;
+  loseScreen.style.display = "none";
+  onScreenScore.textContent = "Score: 0";
   background.style.display = 'none';
   Pokemon.deleteInstance();
   pokemon = null;
@@ -70,6 +73,7 @@ function reset() {
   degradeIntervalTimer = null;
   
   // clear game logs
+  onScreenLog.classList.remove('fade-message');
   outcomeLog.textContent = "";
   moodLog.textContent = "";
   hungerLog.textContent = "";
@@ -87,6 +91,10 @@ closeNameInput.addEventListener('click', () => {
 });
 
 closeGame.addEventListener('click', () => {
+    reset();
+});
+
+closeLoseScreen.addEventListener('click', () => {
     reset();
 });
 
@@ -152,8 +160,17 @@ function updateOnScreenStats() {
 // isFainted function
 function isFainted() {
   if(pokemon.isFainted) {
-    console.log(`${pokemon.getName} fainted. You lose.`);
-    reset();
+    clearInterval(degradeIntervalTimer);
+    clearInterval(pointsCounter);
+
+    gamePokemon.src = "";
+    game.style.display = 'none';
+    loseScreenMessage.textContent = `${pokemon.getName} fainted. You lose.`;
+    loseScreenScore.textContent = `Score: ${score}`;
+    loseScreen.style.display = "block";
+
+    // console.log(`${pokemon.getName} fainted. You lose.`);
+    // reset();
   }
 }
 
@@ -176,8 +193,8 @@ function startStatDegrade() {
 function startPointsCounter() {
   if(!pointsCounter) {
     pointsCounter = setInterval(() => {
-      points++;
-      onScreenPoints.textContent = `Points: ${points}`;
+      score++;
+      onScreenScore.textContent = `Score: ${score}`;
     }, 1000);
   }
 };
@@ -199,15 +216,21 @@ function buttonCooldown() {
   }, 3000);
 }
 
-function updateGameLogs() {
-  // get the values
-  const currentStats = Pokemon.getStatChanges(); 
 
-  // assign to textContent
+function updateGameLogs() {
+  const currentStats = Pokemon.getStatChanges();
+  
   outcomeLog.textContent = currentStats[0];
   moodLog.textContent = currentStats[1];
   hungerLog.textContent = currentStats[2];
   energyLog.textContent = currentStats[3];
+
+  // fade in fade out of logs in mobile
+  onScreenLog.classList.remove('fade-message');
+
+  void onScreenLog.offsetWidth; 
+
+  onScreenLog.classList.add('fade-message');
 }
 
 // play(), feed(), sleep()
@@ -215,7 +238,7 @@ function gameButtonsFunction() {
   playGameButton.addEventListener('click', () => {
     buttonCooldown();
     pokemon.play();
-    points += 10;
+    score += 10;
 
     updateGameLogs();
     updateOnScreenStats();
@@ -225,7 +248,7 @@ function gameButtonsFunction() {
   feedGameButton.addEventListener('click', () => {
     buttonCooldown();
     pokemon.feed();
-    points += 10;
+    score += 10;
     
     updateGameLogs();
     updateOnScreenStats();
@@ -235,7 +258,7 @@ function gameButtonsFunction() {
   sleepGameButton.addEventListener('click', () => {
     buttonCooldown();
     pokemon.sleep();
-    points += 10;
+    score += 10;
     
     updateGameLogs();
     updateOnScreenStats();

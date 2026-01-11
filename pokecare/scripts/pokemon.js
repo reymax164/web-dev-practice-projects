@@ -26,7 +26,7 @@ export default class Pokemon {
     }
     Pokemon.instance = this;
 
-    console.log(this);   
+    // console.log(this);   
   }
 
   static deleteInstance() {
@@ -100,11 +100,6 @@ export default class Pokemon {
   }
 
   limitCheck() {
-    // over ate
-    if(this.hunger >= 110) {
-      details = `${this.name} over ate.`;
-      this.decreaseMood(randomizer(50, 75));
-    }
 
     if(this.mood > 100) this.mood = 100;
     if(this.hunger > 100) this.hunger = 100;
@@ -115,13 +110,13 @@ export default class Pokemon {
 
     if(this.hunger === 0) {
       details = `${this.name} is hungry.`;
-      this.decreaseMood(randomizer(25, 35));
+      this.decreaseMood(randomizer(5, 10));
     }
     if(this.mood < 0) this.mood = 0;
 
     if(this.mood === 0) {
       details = `${this.name} is bored.`;
-      this.decreaseEnergy(randomizer(10, 30));
+      this.decreaseEnergy(randomizer(10, 15));
     }
     if(this.energy < 0) this.energy = 0;
 
@@ -150,9 +145,9 @@ export default class Pokemon {
   static getStatChanges() {
     const statChanges = new Array();
     statChanges.push(details);
-    statChanges.push(`Mood ${moodChange >= 0? "+" : ""}${moodChange}`);
-    statChanges.push(`Hunger ${hungerChange >= 0? "+" : ""}${hungerChange}`);
-    statChanges.push(`Energy ${energyChange >= 0? "+" : ""}${energyChange}`);
+    statChanges.push(`Mood ${moodChange >= 0? "+" : " "}${moodChange}`);
+    statChanges.push(`Hunger ${hungerChange >= 0? "+" : " "}${hungerChange}`);
+    statChanges.push(`Energy ${energyChange >= 0? "+" : " "}${energyChange}`);
 
     return statChanges;
   }
@@ -197,6 +192,12 @@ export default class Pokemon {
       this.increaseHunger(randomizer(10, 29));
       this.decreaseMood(randomizer(30, 50));
       details = `${this.name} didn't liked the food.`;
+    }
+    
+    // over ate
+    if(this.hunger >= 125) {
+      details = `${this.name} over ate.`;
+      this.decreaseMood(randomizer(50, 75));
     }
 
     this.increaseEnergy(randomizer(10, 30));
