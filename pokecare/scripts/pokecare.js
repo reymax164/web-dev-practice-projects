@@ -1,9 +1,11 @@
 import Pokemon from './pokemon.js';
 import PokeAPI from './pokeapi.js';
+import HighScoreHandler from './high-score-handler.js';
 
 // html elements
 const playBtn = document.getElementById('play-btn');
 const background = document.getElementById('transparent-background');
+const backgroundMusic = document.getElementById('bg-music');
 
 // choices
 const choiceModal = document.getElementById('choices-modal');
@@ -32,6 +34,7 @@ const statChanges = Pokemon.getStatChanges();
 const loseScreen = document.getElementById('lose-screen');
 const loseScreenMessage = document.getElementById('lose-screen-message');
 const loseScreenScore = document.getElementById('lose-screen-score');
+const loseScreenHighScore = document.getElementById('lose-screen-high-score');
 
 // game buttons
 const gameButtons = document.querySelectorAll('.game-buttons')
@@ -47,6 +50,7 @@ const onScreenEnergy = document.getElementById('energy-p');
 // variables
 let pokemon = null, choice = null, name = null, cooldownTimer = null, degradeIntervalTimer;
 let score = 0, pointsCounter = null;
+backgroundMusic.volume = 0.5;
 
 // close buttons declarations
 const closeBtns = document.querySelectorAll('.close-btn');
@@ -59,7 +63,9 @@ const closeLoseScreen = closeBtns[3];
 function reset() {
   // logs score
   // console.log(`Points: ${score}`);
-  
+  clearInterval(degradeIntervalTimer);
+  clearInterval(pointsCounter);
+
   score = 0;
   loseScreen.style.display = "none";
   onScreenScore.textContent = "Score: 0";
@@ -78,6 +84,9 @@ function reset() {
   moodLog.textContent = "";
   hungerLog.textContent = "";
   energyLog.textContent = "";
+
+  backgroundMusic.pause();
+  backgroundMusic.currentTime = 0;
 }
 
 // close events
@@ -91,6 +100,7 @@ closeNameInput.addEventListener('click', () => {
 });
 
 closeGame.addEventListener('click', () => {
+  game.style.display = "none";
     reset();
 });
 
@@ -167,10 +177,14 @@ function isFainted() {
     game.style.display = 'none';
     loseScreenMessage.textContent = `${pokemon.getName} fainted. You lose.`;
     loseScreenScore.textContent = `Score: ${score}`;
-    loseScreen.style.display = "block";
 
-    // console.log(`${pokemon.getName} fainted. You lose.`);
-    // reset();
+    // highscore handler
+    if (HighScoreHandler.isNewHighScore(score)) {
+      HighScoreHandler.setHighScore(score);
+    }
+
+    loseScreenHighScore.textContent = `High Score: ${HighScoreHandler.getHighScore()}`;
+    loseScreen.style.display = "block";
   }
 }
 
@@ -310,7 +324,10 @@ async function nameInputFunction() {
     nameTextbox.value = "";
     setGameSprite(choice);
     inputDiv.style.display = "none";
+
     game.style.display = "flex";
+    backgroundMusic.play();
+
     startStatDegrade();
     startPointsCounter();
   });

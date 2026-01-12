@@ -102,6 +102,13 @@ body {
   color: var(--obsidian);
 }
 
+#game-screen > .close-btn {
+  color: var(--sand);
+}
+#game-screen > .close-btn:hover {
+  color: var(--light-obsidian);
+}
+
 #choices-container {
   display: flex;
   flex-wrap: wrap;
@@ -185,6 +192,9 @@ body {
   justify-content: center;
   height: 90%;
   background-color: var(--white);
+  /* background-image: radial-gradient(cyan, blue); */
+  /* background-image: url('./assets/grass-tile.png'); */
+  /* background-position: center center; */
   border-top-right-radius: 16px;
   border-top-left-radius: 16px;
 }
@@ -194,7 +204,8 @@ body {
   justify-self: center;
   height: 20vh;
   position: absolute;
-  bottom: 20%;
+  bottom: 25%;
+  z-index: 1;
 }
 
 #pokemon-name {
@@ -207,7 +218,14 @@ body {
   padding: 2px 4px;
   border-radius: 4px;
   position: absolute;
-  bottom: 20%;
+  bottom: 29%;
+  z-index: 2;
+}
+
+#grass-tile {
+  position: absolute;
+  z-index: 0;
+  bottom: 15%;
 }
 
 #on-screen-score {
@@ -222,7 +240,8 @@ body {
   width: fit-content;
 }
 
-/* #on-screen-log {
+/* older
+  #on-screen-log {
   color: var(--white);
   background-color: var(--moss);
   position: absolute;
@@ -251,26 +270,26 @@ body {
 }
 
 /* log fade in and out */
-  .fade-message {
-      animation: fadeIn-fadeOut 3s ease-in-out forwards;
-  }
+.fade-message {
+    animation: fadeIn-fadeOut 3s ease-in-out forwards;
+}
 
-  @keyframes fadeIn-fadeOut {
-    0% {
-      opacity: 0;
-      transform: translateY(-5px);
-    }
-    10% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+@keyframes fadeIn-fadeOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
   }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 #on-screen-log hr {margin: 4px 0px;}
 
@@ -285,6 +304,7 @@ body {
   padding: 12px 24px;
   border-bottom-right-radius: 16px;
   border-bottom-left-radius: 16px;
+  /* border-top-left-radius: 16px; */
 }
 
 .game-buttons {
@@ -403,6 +423,14 @@ body {
 
   #game-container {
     width: 80vw;
+  }
+
+  #game-pokemon {
+    bottom: 28%;
+  }
+
+  #pokemon-name {
+    bottom: 32%;
   }
 
   #game-btns-container {
