@@ -1,4 +1,4 @@
-export default class HighScoreHandler {
+export default class HighScore {
   static #STORAGE_KEY = 'high_score';
 
   static getHighScore() {

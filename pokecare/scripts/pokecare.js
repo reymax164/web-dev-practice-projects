@@ -1,6 +1,6 @@
 import Pokemon from './pokemon.js';
 import PokeAPI from './pokeapi.js';
-import HighScoreHandler from './high-score-handler.js';
+import HighScore from './high-score.js';
 
 // html elements
 const playBtn = document.getElementById('play-btn');

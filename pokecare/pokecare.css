@@ -67,7 +67,7 @@ body {
   position: relative;
   flex-direction: column;
   min-width: 45vw;
-  max-width: 75vw;
+  max-width: 50vw;
   min-height: 50%;
   max-height: fit-content;
   justify-self: center;
@@ -140,6 +140,56 @@ body {
 .choices:active {
   transform: translateY(0px);
   box-shadow: 2px 2px 5px var(--shadow);
+}
+
+#search-container {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin-top: 5%
+}
+
+#search {
+  color: var(--obsidian);
+  background-color: #fff;
+  border: 1px solid #808080;
+  
+  border-radius: 128px 0 0 128px; 
+  
+  border-right: none; 
+  
+  font-size: 1.25em;
+  padding: 4px 8px;
+  
+  flex: 1; 
+}
+
+#search:focus {
+  outline: none;
+  border: 1.6px solid var(--active-moss);
+  border-right: none;
+}
+
+#search-button {
+  padding: 8px;
+  border: 1px solid #808080;
+  background-color: #f0f0f0;
+  
+  border-radius: 0 128px 128px 0; 
+  
+  width: 45px;
+  height: 33px;
+  
+  cursor: pointer;
+  font-size: 1.2em;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#search-button:hover {
+  background-color: #e0e0e0;
 }
 
 /* ========== name input ========== */
@@ -459,6 +509,18 @@ body {
 @media screen and (max-width: 830px) {
   #menu {
     min-width: 80vw;
+  }
+
+  #choices-modal {
+    max-width: 75vw;
+  }
+
+  #search-container {
+    width: 100%;
+  }
+
+  #search {
+    width: 50%;
   }
 
   #game-container {
