@@ -193,11 +193,11 @@ function isFainted() {
     loseScreenScore.textContent = `Score: ${score}`;
 
     // highscore handler
-    if (HighScoreHandler.isNewHighScore(score)) {
-      HighScoreHandler.setHighScore(score);
+    if (HighScore.isNewHighScore(score)) {
+      HighScore.setHighScore(score);
     }
 
-    loseScreenHighScore.textContent = `High Score: ${HighScoreHandler.getHighScore()}`;
+    loseScreenHighScore.textContent = `High Score: ${HighScore.getHighScore()}`;
     loseScreen.style.display = "block";
   }
 }
